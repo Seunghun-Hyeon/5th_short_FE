@@ -13,6 +13,14 @@ struct MainView: View {
     @State private var tasks = ["3주차 과제", "예제 문제 풀기"]
     @State private var answers = Array(repeating: "", count: 5)
 
+    let questionList: [Question] = [
+        Question(text: "과제를 미루는 이유는 무엇인가요?"),
+        Question(text: "가장 어려웠던 점은 무엇인가요?"),
+        Question(text: "과제를 끝내고 나면 어떤 기분인가요?"),
+        Question(text: "과제를 하기 위해 필요한 것은 무엇인가요?"),
+        Question(text: "지금 바로 시작한다면 어떤 것부터 할 수 있을까요?")
+    ]
+    
     var body: some View {
         NavigationStack(path: $path) {
             VStack {
@@ -51,17 +59,12 @@ struct MainView: View {
 
                 Spacer()
 
-                NavigationLink(
-                    destination: QuestionView(
-                        index: 0,
-                        total: 5,
-                        questionText: "과제를 미루는 이유는 무엇인가요?",
-                        subject: subject,
-                        tasks: tasks,
-                        answers: $answers,
-                        path: $path
-                    )
-                ) {
+
+                // ✅ QuestionView 호출 시 모든 인자 전달
+                Button {
+                    path.append(0) // 첫 번째 질문으로 이동
+                } label: {
+
                     Text("과제 추가하기")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
@@ -74,6 +77,28 @@ struct MainView: View {
                 Spacer()
             }
             .navigationBarHidden(true)
+            .navigationDestination(for: Int.self) { index in
+                QuestionView(
+                    index: index,
+                    total: questionList.count,
+                    questionText: questionList[index].text,
+                    subject: subject,
+                    tasks: tasks,
+                    questionList: questionList,
+                    answers: $answers,
+                    path: $path
+                )
+            }
+            .navigationDestination(for: String.self) { value in
+                if value == "summary" {
+                    SummaryView(
+                        subject: subject,
+                        tasks: tasks,
+                        answers: answers,
+                        path: $path
+                    )
+                }
+            }
         }
     }
 }

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AddView: View {
+    let questionList: [Question]
     @State private var subjectName: String = ""
     @State private var tasks: [String] = [""]
     @State private var answers = Array(repeating: "", count: 5)
@@ -44,6 +45,7 @@ struct AddView: View {
                         questionText: "과제를 미루는 이유는 무엇인가요?",
                         subject: subjectName,
                         tasks: tasks,
+                        questionList: questionList,
                         answers: $answers,
                         path: $path
                     ),

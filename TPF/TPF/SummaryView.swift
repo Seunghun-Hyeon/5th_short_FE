@@ -94,7 +94,7 @@ struct SummaryView: View {
                     TodoManager.saveTodo(todo)
                     
                     // ✅ path 비우면 MainView로 이동
-                    path.removeLast(path.count)
+                    path = NavigationPath()
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
