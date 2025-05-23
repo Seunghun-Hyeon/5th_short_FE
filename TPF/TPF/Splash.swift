@@ -10,16 +10,16 @@ import SwiftUI
 struct Splash: View {
     var body: some View {
         ZStack {
-            Color.blue
-                .edgesIgnoringSafeArea(.all)
+            Color(red: 114/255, green: 140/255, blue: 255/255)
+                    .ignoresSafeArea()
             
             VStack {
-                Image(systemName: "star.fill")
+                Image("splashicon")
                     .font(.system(size: 100))
                     .foregroundColor(.white)
-                Text("스플래시 화면")
-                    .font(.title)
-                    .foregroundColor(.white)
+//                Text("미루니")
+//                    .font(.title)
+//                    .foregroundColor(.white)
             }
         }
     }

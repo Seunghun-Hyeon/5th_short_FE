@@ -26,30 +26,31 @@ struct MainView: View {
 
                 VStack(spacing: 20) {
                     Rectangle()
-                        .fill(Color(UIColor.systemGray5))
+                        .fill(Color(red: 246/255, green: 247/255, blue: 250/255))
                         .frame(width: 250, height: 250)
                         .overlay(
-                            Image(systemName: "person.fill.questionmark")
+                            Image("icon")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 80, height: 80)
-                                .foregroundColor(.gray)
                         )
 
-                    Text("오늘은 어떤 과제를 시작할까요?\n미루니가 도와줄게요 :)")
+                    Text("왜 미루니?")
                         .font(.system(size: 24))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.primary)
+                    Text("미루니랑 같이 천천히 과제를 시작해보아요")
+                        .font(.system(size: 14))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray)
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color(UIColor.systemGray5))
+                .background(Color(red: 246/255, green: 247/255, blue: 250/255)) // 카드 전체 배경
                 .cornerRadius(20)
                 .padding(.horizontal)
 
                 Spacer()
 
-                // ✅ QuestionView 호출 시 모든 인자 전달
                 NavigationLink(
                     destination: QuestionView(
                         index: 0,
@@ -65,8 +66,7 @@ struct MainView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(UIColor.systemGray5))
-                        .foregroundColor(.black)
+                        .background(Color(red: 115/255, green: 152/255, blue: 251/255))             .foregroundColor(.white)
                         .cornerRadius(12)
                         .padding(.horizontal)
                 }

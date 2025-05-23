@@ -114,9 +114,9 @@ struct QuestionView: View {
     func exampleAnswer(for question: String) -> String {
         switch question {
         case "과제를 미루는 이유는 무엇인가요?":
-            return "딱 시작하기가 너무 막막하고 귀찮아요. 시작이 어려워요."
+            return "시작하기가 너무 막막하고 귀찮아요. 시작이 어려워요."
         case "가장 어려웠던 점은 무엇인가요?":
-            return "개념은 이해했는데 응용하는 문제는 도저히 손이 안 가요."
+            return "개념은 이해했는데 응용하는 문제는 도저히 손이 안가서 시작이 어려워요."
         case "과제를 끝내고 나면 어떤 기분인가요?":
             return "끝내고 나면 진짜 해방된 느낌이라 뿌듯해요."
         case "과제를 하기 위해 필요한 것은 무엇인가요?":
