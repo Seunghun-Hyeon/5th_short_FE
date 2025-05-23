@@ -113,27 +113,27 @@ struct QuestionView: View {
 
     func exampleAnswer(for question: String) -> String {
         switch question {
-        case "과제를 미루는 이유는 무엇인가요?":
-            return "딱 시작하기가 너무 막막하고 귀찮아요. 시작이 어려워요."
-        case "가장 어려웠던 점은 무엇인가요?":
-            return "개념은 이해했는데 응용하는 문제는 도저히 손이 안 가요."
-        case "과제를 끝내고 나면 어떤 기분인가요?":
-            return "끝내고 나면 진짜 해방된 느낌이라 뿌듯해요."
-        case "과제를 하기 위해 필요한 것은 무엇인가요?":
-            return "핸드폰을 멀리하고 집중할 수 있는 조용한 공간이 필요해요."
-        case "지금 바로 시작한다면 어떤 것부터 할 수 있을까요?":
-            return "우선 강의 다시 보면서 과제 조건 정리부터 해볼 수 있을 것 같아요."
+        case "무슨 과제를 미루고 있었나요?":
+            return "자료구조"
+        case "어떤 상활일 때 과제를 미루게 되나요?":
+            return "피곤할 때, 귀찮을 때"
+        case "과제를 미루고, 대신 어떤 활동을 하나요?":
+            return "유튜브 보기, 눕기, 놀기"
+        case "과제를 실제로 시작하는 건 보통 언제쯤 인가요?":
+            return "마감당일"
+        case "과제를 시작하려고 할 때, 머릿속에 어떤 생각이드나요?":
+            return "너무 귀찮고 귀찮고 그냥 귀찮아요"
         default:
             return "시간이 없어서 자꾸 미루게 돼요"
         }
     }
 
     let questionList: [Question] = [
-        Question(text: "과제를 미루는 이유는 무엇인가요?"),
-        Question(text: "가장 어려웠던 점은 무엇인가요?"),
-        Question(text: "과제를 끝내고 나면 어떤 기분인가요?"),
-        Question(text: "과제를 하기 위해 필요한 것은 무엇인가요?"),
-        Question(text: "지금 바로 시작한다면 어떤 것부터 할 수 있을까요?")
+        Question(text: "무슨 과제를 미루고 있었나요?"),
+        Question(text: "어떤 상활일 때 과제를 미루게 되나요?"),
+        Question(text: "과제를 미루고, 대신 어떤 활동을 하나요?"),
+        Question(text: "과제를 실제로 시작하는 건 보통 언제쯤 인가요?"),
+        Question(text: "과제를 시작하려고 할 때, 머릿속에 어떤 생각이드나요?")
     ]
 
     struct Question {

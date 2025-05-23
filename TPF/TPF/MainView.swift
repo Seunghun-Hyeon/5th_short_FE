@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        _ = scanner.scanString("#") // '#' 제거
+        var rgb: UInt64 = 0
+        scanner.scanHexInt64(&rgb)
+
+        let r = Double((rgb >> 16) & 0xFF) / 255
+        let g = Double((rgb >> 8) & 0xFF) / 255
+        let b = Double(rgb & 0xFF) / 255
+
+        self.init(red: r, green: g, blue: b)
+    }
+}
+
 struct MainView: View {
     @State private var path = NavigationPath()
     @State private var subject = "자료구조"
@@ -21,35 +36,40 @@ struct MainView: View {
                     Spacer()
                         .frame(width: 300)
                 }
-
+                
                 Spacer()
-
+                
                 VStack(spacing: 20) {
-                    Rectangle()
-                        .fill(Color(UIColor.systemGray5))
-                        .frame(width: 250, height: 250)
-                        .overlay(
-                            Image(systemName: "person.fill.questionmark")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(hex: "F6F7FA"))
+                            .frame(height: 260)
+                        
+                        VStack(spacing: 16) {
+                            Image("icon")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 80, height: 80)
+                                .frame(width: 100, height: 100)
+                            
+                            Text("왜 미루니?")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                            
+                            Text("과제를 미루게 되는 이유,\n같이 생각해 볼까요?")
+                                .font(.subheadline)
+                                .multilineTextAlignment(.center)
                                 .foregroundColor(.gray)
-                        )
-
-                    Text("오늘은 어떤 과제를 시작할까요?\n미루니가 도와줄게요 :)")
-                        .font(.system(size: 24))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.primary)
+                        }
+                    }
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color(UIColor.systemGray5))
                 .cornerRadius(20)
                 .padding(.horizontal)
 
                 Spacer()
 
-                // ✅ QuestionView 호출 시 모든 인자 전달
                 NavigationLink(
                     destination: QuestionView(
                         index: 0,
@@ -65,8 +85,8 @@ struct MainView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(UIColor.systemGray5))
-                        .foregroundColor(.black)
+                        .background(Color(hex: "7398FB"))
+                        .foregroundColor(.white)
                         .cornerRadius(12)
                         .padding(.horizontal)
                 }

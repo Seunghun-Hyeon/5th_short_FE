@@ -12,8 +12,8 @@ func extractWordFrequencies(from answers: [String]) -> [WordFrequency] {
     let allWords = answers.joined(separator: " ")
         .components(separatedBy: .whitespacesAndNewlines)
         .map { $0.trimmingCharacters(in: .punctuationCharacters) }
-        .filter { !$0.isEmpty && !stopWords.contains($0) }
-
+        .filter { !$0.isEmpty && $0.count >= 2 }
+    
     let freqDict = Dictionary(grouping: allWords, by: { $0 }).mapValues { $0.count }
     let sorted = freqDict.sorted { $0.value > $1.value }.prefix(10)
     return sorted.map { WordFrequency(word: $0.key, count: $0.value) }
