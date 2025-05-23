@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var path = NavigationPath()
+    @State private var subject = "자료구조"
+    @State private var tasks = ["3주차 과제", "예제 문제 풀기"]
+    @State private var answers = Array(repeating: "", count: 5)
+
     var body: some View {
-        NavigationStack {
-            VStack() {
+        NavigationStack(path: $path) {
+            VStack {
                 HStack {
                     Image("miroonyee")
-                    
                     Spacer()
                         .frame(width: 300)
                 }
+
                 Spacer()
+
                 VStack(spacing: 20) {
                     Rectangle()
                         .fill(Color(UIColor.systemGray5))
@@ -31,7 +37,7 @@ struct MainView: View {
                         )
 
                     Text("오늘은 어떤 과제를 시작할까요?\n미루니가 도와줄게요 :)")
-                        .font(.body)
+                        .font(.system(size: 24))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.primary)
                 }
@@ -43,8 +49,18 @@ struct MainView: View {
 
                 Spacer()
 
-                // 하단 과제 추가 버튼
-                NavigationLink(destination: AddView()) {
+                // ✅ QuestionView 호출 시 모든 인자 전달
+                NavigationLink(
+                    destination: QuestionView(
+                        index: 0,
+                        total: 5,
+                        questionText: "과제를 미루는 이유는 무엇인가요?",
+                        subject: subject,
+                        tasks: tasks,
+                        answers: $answers,
+                        path: $path
+                    )
+                ) {
                     Text("과제 추가하기")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
@@ -65,4 +81,3 @@ struct MainView: View {
 #Preview {
     MainView()
 }
-
