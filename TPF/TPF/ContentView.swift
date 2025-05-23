@@ -13,11 +13,11 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if showMainView {
-                
+                MainView()
             } else {
                 Splash()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             withAnimation {
                                 showMainView = true
                             }
@@ -31,3 +31,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
