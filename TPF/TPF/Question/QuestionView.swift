@@ -12,6 +12,7 @@ struct QuestionView: View {
     let questionText: String
     let subject: String
     let tasks: [String]
+    let questionList: [Question]
     @Binding var answers: [String]
     @Binding var path: NavigationPath
     @State private var input: String = ""
@@ -69,7 +70,11 @@ struct QuestionView: View {
             // 다음으로 이동 버튼
             Button(action: {
                 answers[index] = input
-                goNext = true
+                if index + 1 < total {
+                    path.append(index + 1)
+                } else {
+                    path.append("summary")
+                }
             }) {
                 Text("다음으로")
                     .frame(maxWidth: .infinity)
@@ -77,11 +82,6 @@ struct QuestionView: View {
                     .background(Color(UIColor.systemGray5))
                     .cornerRadius(10)
                     .foregroundColor(.black)
-            }
-
-            // 다음 뷰로 Navigation
-            NavigationLink(destination: nextDestination(), isActive: $goNext) {
-                EmptyView()
             }
         }
         .padding()
@@ -98,6 +98,7 @@ struct QuestionView: View {
                 questionText: questionList[index + 1].text,
                 subject: subject,
                 tasks: tasks,
+                questionList: questionList,
                 answers: $answers,
                 path: $path
             )
@@ -128,15 +129,4 @@ struct QuestionView: View {
         }
     }
 
-    let questionList: [Question] = [
-        Question(text: "과제를 미루는 이유는 무엇인가요?"),
-        Question(text: "가장 어려웠던 점은 무엇인가요?"),
-        Question(text: "과제를 끝내고 나면 어떤 기분인가요?"),
-        Question(text: "과제를 하기 위해 필요한 것은 무엇인가요?"),
-        Question(text: "지금 바로 시작한다면 어떤 것부터 할 수 있을까요?")
-    ]
-
-    struct Question {
-        let text: String
-    }
 }
