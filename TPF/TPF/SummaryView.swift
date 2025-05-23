@@ -8,16 +8,24 @@ struct WordFrequency: Identifiable {
 }
 
 func extractWordFrequencies(from answers: [String]) -> [WordFrequency] {
-    let stopWords: Set<String> = ["은", "는", "이", "가", "을", "를", "에", "도", "으로", "해서", "인데", "부터", "까지", "하고", "그리고", "그런데", "그러면"]
+    let stopWords: Set<String> = ["은", "는", "이", "가", "을", "를", "에", "도", "으로", "해서", "인데", "부터", "까지", "하고", "그리고", "그런데", "그러면","해요","요","이라"]
+
     let allWords = answers.joined(separator: " ")
         .components(separatedBy: .whitespacesAndNewlines)
         .map { $0.trimmingCharacters(in: .punctuationCharacters) }
-        .filter { !$0.isEmpty && !stopWords.contains($0) }
 
-    let freqDict = Dictionary(grouping: allWords, by: { $0 }).mapValues { $0.count }
+    let cleanedWords = allWords.map { word in
+        stopWords.reduce(word) { partial, stop in
+            partial.hasSuffix(stop) ? String(partial.dropLast(stop.count)) : partial
+        }
+    }
+        .filter { !$0.isEmpty && $0.count >= 2 }
+
+    let freqDict = Dictionary(grouping: cleanedWords, by: { $0 }).mapValues { $0.count }
     let sorted = freqDict.sorted { $0.value > $1.value }.prefix(10)
     return sorted.map { WordFrequency(word: $0.key, count: $0.value) }
 }
+
 
 func generateOneLineSummary(from keywords: [String], subject: String) -> String {
     guard !keywords.isEmpty else {
