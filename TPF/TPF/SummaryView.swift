@@ -20,19 +20,13 @@ func extractWordFrequencies(from answers: [String]) -> [WordFrequency] {
 }
 
 func generateOneLineSummary(from keywords: [String], subject: String) -> String {
-    guard !keywords.isEmpty else {
+    guard let topKeyword = keywords.first else {
         return "[\(subject)] 과제에 대해 요약할 정보가 부족해요."
     }
-    if keywords.count == 1 {
-        return "‘\(keywords[0])’이(가) \(subject) 과제를 미루는 주요 이유로 나타났어요."
-    } else if keywords.count == 2 {
-        return "\(keywords[0])과 \(keywords[1])이(가) \(subject) 과제를 진행하는 데 영향을 주고 있어요."
-    } else {
-        let prefix = keywords.dropLast().joined(separator: ", ")
-        let last = keywords.last!
-        return "\(prefix) 그리고 \(last) 관련 문제가 \(subject) 과제를 미루는 원인으로 보입니다."
-    }
+
+    return "‘\(topKeyword)’이(가) \(subject) 과제를 미루는 주요 이유로 나타났어요."
 }
+
 
 struct SummaryView: View {
     let subject: String
@@ -75,7 +69,7 @@ struct SummaryView: View {
                         .padding(.vertical, 2)
                 }
 
-                Button("✅ 저장하고 메인으로") {
+                Button("저장하기") {
                     let todo = Todo(
                         id: UUID(),
                         subject: subject,
@@ -85,8 +79,8 @@ struct SummaryView: View {
                     )
                     TodoManager.saveTodo(todo)
                     
-                    // ✅ path 비우면 MainView로 이동
-                    path.removeLast(path.count)
+
+                    path.append("total")
                 }
                 .frame(maxWidth: .infinity)
                 .padding()

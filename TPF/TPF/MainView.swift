@@ -94,10 +94,12 @@ struct MainView: View {
                 Spacer()
             }
             .navigationBarHidden(true)
+            .navigationDestination(for: String.self) { value in
+                if value == "total" {
+                    TotalView() // 여기에 실제 TotalView 작성돼 있어야 함!
+                }
+            }
         }
+        
     }
-}
-
-#Preview {
-    MainView()
 }

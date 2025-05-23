@@ -16,7 +16,7 @@ struct QuestionView: View {
     @Binding var path: NavigationPath
     @State private var input: String = ""
     @State private var goNext = false
-
+    @FocusState private var isTextEditorFocused: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // 상단 질문 번호
@@ -39,6 +39,7 @@ struct QuestionView: View {
                 TextEditor(text: $input)
                     .padding(8)
                     .background(Color.clear)
+                    .focused($isTextEditorFocused)  // 🔹 TextEditor에 포커스 적용
                     .cornerRadius(12)
                     .frame(height: 150)
             }
@@ -87,6 +88,14 @@ struct QuestionView: View {
         .padding()
         .navigationTitle("질문 페이지")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("완료") {
+                    isTextEditorFocused = false
+                }
+            }
+        }
     }
 
     @ViewBuilder
