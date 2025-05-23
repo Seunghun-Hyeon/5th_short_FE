@@ -31,7 +31,7 @@ struct MainView: View {
                         )
 
                     Text("오늘은 어떤 과제를 시작할까요?\n미루니가 도와줄게요 :)")
-                        .font(.body)
+                        .font(.system(size: 24))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.primary)
                 }
